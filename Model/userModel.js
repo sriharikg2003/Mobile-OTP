@@ -6,14 +6,19 @@ const userSchema = Schema({
     number :{
         type : String,
         required : true
-    }}
+    },
+    email : String,
+    password : String
+    }
     ,{timestamps : true})
 
 
 userSchema.methods.generateJWT = function (){
     const token = jwt.sign({
         _id : this._id,
-        number : this.number
+        number : this.number,
+        email : this.emailm,
+        password : this.password
     } , process.env.JWT_SECRET_KEY,
     {expiresIn : "7d"});
      
